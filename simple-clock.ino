@@ -66,7 +66,7 @@ String getTime()
 
 String getDate()
 {
-DateTime now = rtc.now();
+  DateTime now = rtc.now();
 
   return (String(now.day()) + "/" + String(now.month()) + "/" + String(now.year()));
 }
@@ -129,16 +129,6 @@ void servoWrite(float value)
 
 void toggleFunc()
 {
-  // if (digitalRead(btnPin) == HIGH)
-  // {
-  //   servoWrite(getTemp());
-  // }
-
-  // else 
-  // {
-  //   oledWrite(getTime());
-  // }
-
   if (digitalRead(btnPin) == LOW)
   {
     buttonIsPressed = false;
