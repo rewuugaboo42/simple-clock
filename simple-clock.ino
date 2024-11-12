@@ -6,7 +6,7 @@
 * Further, it measures temprature with a analog temprature module and displays a mapped value to a 9g-servo-motor
 */
 
-// Include Libraries
+// Include libraries
 #include <Servo.h>
 #include "U8glib.h"
 #include <RTClib.h>
@@ -23,7 +23,7 @@ constexpr int btnPin{ 3 };
 bool buttonIsPressed{ false };
 char t[32];
 
-// construct objects
+// Construct objects
 Servo myServo;
 
 U8GLIB_SSD1306_128X64 u8g(U8G_I2C_OPT_NO_ACK);
@@ -52,9 +52,9 @@ void loop()
 
 
 /*
-*This function reads time from an ds3231 module and package the time as a String
-*Parameters: Void
-*Returns: time in hh:mm:ss as String
+* This function reads time from an ds3231 module and package the time as a String
+* Parameters: Void
+* Returns: time in hh:mm:ss as String
 */
 String getTime()
 {
@@ -73,8 +73,8 @@ String getDate()
 
 /*
 * This function reads an analog pin connected to an analog temprature sensor and calculates the corresponding temp
-*Parameters: Void
-*Returns: temprature as float
+* Parameters: Void
+* Returns: temprature as String
 */
 String getTemp()
 {
@@ -92,7 +92,7 @@ String getTemp()
   temp_lsb = Wire.read() >> 6;
 
   if ((temp_msb & 0x80) != 0)
-      nint = temp_msb | ~((1 << 8) - 1);      // if negative get two's complement
+      nint = temp_msb | ~((1 << 8) - 1); // if negative get two's complement
   else
       nint = temp_msb;
 
@@ -102,9 +102,9 @@ String getTemp()
 }
 
 /*
-* This function takes a string and draws it to an oled display
-*Parameters: - text: String to write to display
-*Returns: void
+* This function takes a string and an optional string and draws it to an oled display
+* Parameters: - text, text2: String to write to display, Optional String to write to display
+* Returns: void
 */
 void oledWrite(String text, String text2 = "")
 {
@@ -119,14 +119,19 @@ void oledWrite(String text, String text2 = "")
 
 /*
 * takes a temprature value and maps it to corresppnding degree on a servo
-*Parameters: - value: temprature
-*Returns: void
+* Parameters: - value: temperature
+* Returns: void
 */
 void servoWrite(float value)
 {
   myServo.write(value);
 }
 
+/*
+* Toggles what should be output to the oled display
+* Parameters: Void
+* Returns: void
+*/
 void toggleFunc()
 {
   if (digitalRead(btnPin) == LOW)
@@ -141,4 +146,3 @@ void toggleFunc()
     oledWrite(String(getTemp()));
   }
 }
-
