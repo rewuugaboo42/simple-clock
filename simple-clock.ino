@@ -129,7 +129,7 @@ void servoWrite(float value)
 
 /*
 * Toggles what should be output to the oled display
-* Parameters: Void
+* Parameters: void
 * Returns: void
 */
 void toggleFunc()
